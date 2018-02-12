@@ -100,26 +100,28 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="react,react-native," />
 
 
-<meta name="description" content="From Zero to Hero">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chipanda&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。想着写成自己的第一个系列博客，梳理巩固所思所得，将来忘了也能有个快速回顾的资料。如果能对他人有所助益，是更吼的了。 以下是目录结构  React中的类ReactElement：节点类ReactComponent：外部组件类">
+<meta name="keywords" content="react,react-native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="react源码分析（前言）">
+<meta property="og:url" content="http://yoursite.com/2018/02/12/react源码分析（前言）/index.html">
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
-<meta property="og:description" content="From Zero to Hero">
+<meta property="og:description" content="看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。想着写成自己的第一个系列博客，梳理巩固所思所得，将来忘了也能有个快速回顾的资料。如果能对他人有所助益，是更吼的了。 以下是目录结构  React中的类ReactElement：节点类ReactComponent：外部组件类">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-12T12:12:27.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chipanda&#39;s Blog">
-<meta name="twitter:description" content="From Zero to Hero">
+<meta name="twitter:title" content="react源码分析（前言）">
+<meta name="twitter:description" content="看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。想着写成自己的第一个系列博客，梳理巩固所思所得，将来忘了也能有个快速回顾的资料。如果能对他人有所助益，是更吼的了。 以下是目录结构  React中的类ReactElement：节点类ReactComponent：外部组件类">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/12/react源码分析（前言）/"/>
 
 
 
@@ -128,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>Chipanda's Blog</title>
+  <title>react源码分析（前言） | Chipanda's Blog</title>
   
 
 
@@ -175,8 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -281,9 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/12/react源码分析（前言）/" itemprop="url">react源码分析（前言）</a></h1>
+          <h1 class="post-title" itemprop="name headline">react源码分析（前言）</h1>
         
 
         <div class="post-meta">
@@ -360,8 +359,7 @@
       
 
       
-        
-          <p>看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。<br>想着写成自己的第一个系列博客，梳理巩固所思所得，将来忘了也能有个快速回顾的资料。如果能对他人有所助益，是更吼的了。</p>
+        <p>看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。<br>想着写成自己的第一个系列博客，梳理巩固所思所得，将来忘了也能有个快速回顾的资料。如果能对他人有所助益，是更吼的了。</p>
 <p>以下是目录结构</p>
 <blockquote>
 <h2 id="React中的类"><a href="#React中的类" class="headerlink" title="React中的类"></a>React中的类</h2><p>ReactElement：节点类<br>ReactComponent：外部组件类<br>ReactCompositeComponent：内部组件类<br>ReactNativeBaseComponent：RN中映射到Native的组件类     </p>
@@ -371,14 +369,8 @@
 <h2 id="React的更新流程（二）"><a href="#React的更新流程（二）" class="headerlink" title="React的更新流程（二）"></a>React的更新流程（二）</h2><p>batchedUpdates：保证callback在一次updatequeue中执行<br>enqueueUpdate：压入一个需更新的internalInstance<br>flushBatchedUpdates: 发起一次清空待更新组件<br>例子：setState后取到的值是新值还是旧值      </p>
 <h2 id="React的更新流程（三）"><a href="#React的更新流程（三）" class="headerlink" title="React的更新流程（三）"></a>React的更新流程（三）</h2><p>ReactReconciler：组件处理中心：挂载、更新、卸载<br>ReactChildReconciler：对children中有需要的项执行ReactReconciler<br>ReactMultiChild：拓展ReactNativeBaseComponent，作为中间层调用ReactChildReconciler，children diff更新策略</p>
 </blockquote>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/12/react源码分析（前言）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
-          </div>
-          <!--/noindex-->
-        
+<a id="more"></a>
+
       
     </div>
 
@@ -396,14 +388,22 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+        </div>
+      
+
+      
+      
+      
 
       
 
       
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -413,14 +413,22 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -441,8 +449,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -515,6 +532,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React中的类"><span class="nav-number">1.</span> <span class="nav-text">React中的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React中类实例之间的关系"><span class="nav-number">2.</span> <span class="nav-text">React中类实例之间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React中的一些工具辅助类"><span class="nav-number">3.</span> <span class="nav-text">React中的一些工具辅助类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（一）"><span class="nav-number">4.</span> <span class="nav-text">React的更新流程（一）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（二）"><span class="nav-number">5.</span> <span class="nav-text">React的更新流程（二）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（三）"><span class="nav-number">6.</span> <span class="nav-text">React的更新流程（三）</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -642,6 +675,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
