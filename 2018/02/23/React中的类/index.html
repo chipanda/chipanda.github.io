@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
 <meta property="og:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-23T13:12:46.000Z">
+<meta property="og:updated_time" content="2018-02-23T13:22:50.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React中的类">
 <meta name="twitter:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。">
@@ -360,8 +360,10 @@
 
       
         <p>React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。<br><a id="more"></a></p>
+<hr>
 <h2 id="ReactElement：节点类"><a href="#ReactElement：节点类" class="headerlink" title="ReactElement：节点类"></a>ReactElement：节点类</h2><p>数据节点，以后简称element，存储了type、key、ref、props等内容。</p>
 <p>render的作用就是生成element，是渲染的第一站。element保存了props而并没有state，因为state会在render方法内作为某个element的props存储在element中。</p>
+<hr>
 <h2 id="ReactComponent：外部组件类"><a href="#ReactComponent：外部组件类" class="headerlink" title="ReactComponent：外部组件类"></a>ReactComponent：外部组件类</h2><p>开发中定义组件所写的类。“外部”可以理解为由开发人员使用的，相对的“内部”是指React内部实现渲染更新而使用的。其实例称为publicInstance。   </p>
 <p>可分为继承于React.Component的组件、纯函数组件两种。两者都实现了render方法，所以程序中任意界面无论多复杂，总能通过层层嵌套生成各级element。不同的是前者可维护state，并具备相应生命周期，这些定义将作用于React内部执行渲染更新。</p>
 <p>ReactComponent具备setState和forState两个方法，两个方法的本质是在内部调用updater的相关方法压入待更新组件（在ReactUpdateQueue中详细介绍）。</p>
@@ -371,6 +373,7 @@
 <li>维护了state    </li>
 <li>解释了在生命周期或事件触发时希望执行的内容    </li>
 </ol>
+<hr>
 <h2 id="ReactCompositeComponent：内部组件类"><a href="#ReactCompositeComponent：内部组件类" class="headerlink" title="ReactCompositeComponent：内部组件类"></a>ReactCompositeComponent：内部组件类</h2><p>React内部真正管理组件渲染和更新的类（手动划重点）。其实例为internalInstance的一种。</p>
 <p>在RN中internalInstance有两种，分别是ReactCompositeComponent和ReactNativeBaseComponent的实例。</p>
 <p>一个节点通常会经历挂载、更新、卸载三个生命阶段。节点树上的element，若其type是ReactComponent，则会在挂载时转化为ReactCompositeComponent实例。</p>
@@ -395,6 +398,7 @@
 <li>对_renderedComponent继续unmountComponent，完成了一次卸载过程中的向下解析。 </li>
 <li>清空存储的各种5数据</li>
 </ol>
+<hr>
 <h2 id="ReactNativeBaseComponent：RN中映射到Native的组件类"><a href="#ReactNativeBaseComponent：RN中映射到Native的组件类" class="headerlink" title="ReactNativeBaseComponent：RN中映射到Native的组件类"></a>ReactNativeBaseComponent：RN中映射到Native的组件类</h2><p>真正会被Native渲染的组件类，通过UIManager将渲染内容传递给Native绘制。其实例为internalInstance的一种。</p>
 <p>在RN中，所有的children的父节点都是ReactNativeBaseComponent（重点，理解树结构是如何解析的）。</p>
 <p>实现了挂载、更新、卸载的方法，通过UIManager操作Native的UI，向下处理children的解析。</p>
@@ -410,6 +414,7 @@
 <h3 id="卸载：unmountComponent-1"><a href="#卸载：unmountComponent-1" class="headerlink" title="卸载：unmountComponent"></a>卸载：unmountComponent</h3><ol>
 <li>遍历children执行unmountComponent </li>
 </ol>
+<hr>
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="初始化挂载流程"><a href="#初始化挂载流程" class="headerlink" title="初始化挂载流程"></a>初始化挂载流程</h3><ol>
 <li>顶层element -&gt; 实例化为internalInstance（ReactCompositeComponent） -&gt; internalInstance.mountComponent -&gt; render获得下一级element（重复实例化并mountComponent，直至遇到ReactNativeComponent） -&gt; UIManager.createView(Native中真实创建View，返回关联的tag) -&gt; 遍历children， 对child（element）实例化为internalInstance，重复上述挂载过程 -&gt; UIManager.setChildren(将子节点渲染的tag与父tag关联)    </li>
 <li>对于element树，从上到下逐层渲染，element实例化为ReactCompositeComponent或ReactNativeBaseComponent，子节点为数组的均包裹在ReactNativeBaseComponent下。 </li>
