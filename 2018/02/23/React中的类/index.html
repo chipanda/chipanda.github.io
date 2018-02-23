@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
 <meta property="og:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-23T12:45:33.000Z">
+<meta property="og:updated_time" content="2018-02-23T12:53:48.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React中的类">
 <meta name="twitter:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。">
@@ -366,81 +366,32 @@
 <p>可分为继承于React.Component的组件、纯函数组件两种。两者都实现了render方法，所以程序中任意界面无论多复杂，总能通过层层嵌套生成各级element。不同的是前者可维护state，并具备相应生命周期，这些定义将作用于React内部执行渲染更新。</p>
 <p>ReactComponent具备setState和forState两个方法，两个方法的本质是在内部调用updater的相关方法压入待更新组件（在ReactUpdateQueue中详细介绍）。</p>
 <p><em>注释：React中ReactComponent特指React.Component，我们这里把纯函数也算作一个特殊的ReactComponent，即外部组件类，便于后续理解。</em></p>
-<blockquote>
-<h3 id="总结为三点主要作用："><a href="#总结为三点主要作用：" class="headerlink" title="总结为三点主要作用："></a>总结为三点主要作用：</h3><ol>
-<li>描述了渲染的树结构   </li>
-<li>维护了state    </li>
-<li>解释了在生命周期或事件触发时希望执行的内容    </li>
-</ol>
-</blockquote>
+<blockquote><br><br>### 总结为三点主要作用：<br><br>1. 描述了渲染的树结构<br>2. 维护了state<br>3. 解释了在生命周期或事件触发时希望执行的内容<br></blockquote>
+
 <h2 id="ReactCompositeComponent：内部组件类"><a href="#ReactCompositeComponent：内部组件类" class="headerlink" title="ReactCompositeComponent：内部组件类"></a>ReactCompositeComponent：内部组件类</h2><p>React内部真正管理组件渲染和更新的类（手动划重点）。其实例为internalInstance的一种。</p>
 <p>在RN中internalInstance有两种，分别是ReactCompositeComponent和ReactNativeBaseComponent的实例。</p>
 <p>一个节点通常会经历挂载、更新、卸载三个生命阶段。节点树上的element，若其type是ReactComponent，则会在挂载时转化为ReactCompositeComponent实例。</p>
 <p>实现了挂载、更新、卸载的方法，并负责在合适的时机触发生命周期方法。</p>
-<blockquote>
-<h3 id="挂载：mountComponent"><a href="#挂载：mountComponent" class="headerlink" title="挂载：mountComponent"></a>挂载：mountComponent</h3><p>返回值为markup，即本节点渲染的内容，在RN中是与Native渲染的真实View关联的一个ID。    </p>
-<ol>
-<li>生成ReactComponent的实例，存放于_instance。    </li>
-<li>执行componentWillMount  </li>
-<li>执行render获得一个element，存放于_renderedElement，根据element获得对应的internalInstance，存放于_renderedComponent，继续对其执行mountComponent，这样就完成了一次挂载过程中的向下解析。直至internalInstance是ReactNativeBaseComponent，就获得了与Native真实View关联的ID，作为markup递归返回。    </li>
-<li>将componentDidMount压入待执行队列</li>
-</ol>
-</blockquote>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><blockquote>
-<h3 id="更新：updateComponent"><a href="#更新：updateComponent" class="headerlink" title="更新：updateComponent"></a>更新：updateComponent</h3><ol>
-<li>判断context更改或element的不同，触发componentWillReceiveProps。（props变化伴随着新element）    </li>
-<li>通过_pendingForceUpdate和shouldComponentUpdate决定是否更新。若更新，执行以下：    </li>
-<li>执行componentWillUpdate </li>
-<li>执行render获得一个element，与之前的_renderedElement对比是否可以通过在旧组件上更新完成变动</li>
-<li>若可以，对_renderedComponent继续执行updateComponent，完成了一次更新过程中的向下解析。  </li>
-<li>若不可以，卸载旧_renderedComponent，根据element实例化并挂载新的_renderedComponent，使用其返回的Markup对旧的进行替换</li>
-</ol>
-</blockquote>
-<h2 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h2><blockquote>
-<h3 id="卸载：unmountComponent"><a href="#卸载：unmountComponent" class="headerlink" title="卸载：unmountComponent"></a>卸载：unmountComponent</h3><ol>
-<li>执行componentWillUnmount </li>
-<li>对_renderedComponent继续unmountComponent，完成了一次卸载过程中的向下解析。 </li>
-<li>清空存储的各种5数据</li>
-</ol>
-</blockquote>
+<blockquote><br><br>### 挂载：mountComponent<br><br>返回值为markup，即本节点渲染的内容，在RN中是与Native渲染的真实View关联的一个ID。<br>1. 生成ReactComponent的实例，存放于_instance。<br>2. 执行componentWillMount<br>3. 执行render获得一个element，存放于_renderedElement，根据element获得对应的internalInstance，存放于_renderedComponent，继续对其执行mountComponent，这样就完成了一次挂载过程中的向下解析。直至internalInstance是ReactNativeBaseComponent，就获得了与Native真实View关联的ID，作为markup递归返回。<br>4. 将componentDidMount压入待执行队列<br></blockquote>
+
+<blockquote><br><br>### 更新：updateComponent<br>1. 判断context更改或element的不同，触发componentWillReceiveProps。（props变化伴随着新element）<br>2. 通过_pendingForceUpdate和shouldComponentUpdate决定是否更新。若更新，执行以下：<br>3. 执行componentWillUpdate<br>4. 执行render获得一个element，与之前的_renderedElement对比是否可以通过在旧组件上更新完成变动<br>5. 若可以，对_renderedComponent继续执行updateComponent，完成了一次更新过程中的向下解析。<br>6. 若不可以，卸载旧_renderedComponent，根据element实例化并挂载新的_renderedComponent，使用其返回的Markup对旧的进行替换<br></blockquote>
+
+<blockquote><br><br>### 卸载：unmountComponent<br>1. 执行componentWillUnmount<br>2. 对_renderedComponent继续unmountComponent，完成了一次卸载过程中的向下解析。<br>3. 清空存储的各种5数据<br></blockquote>
+
 <h2 id="ReactNativeBaseComponent：RN中映射到Native的组件类"><a href="#ReactNativeBaseComponent：RN中映射到Native的组件类" class="headerlink" title="ReactNativeBaseComponent：RN中映射到Native的组件类"></a>ReactNativeBaseComponent：RN中映射到Native的组件类</h2><p>真正会被Native渲染的组件类，通过UIManager将渲染内容传递给Native绘制。其实例为internalInstance的一种。</p>
 <p>在RN中，所有的children的父节点都是ReactNativeBaseComponent（重点，理解树结构是如何解析的）。</p>
 <p>实现了挂载、更新、卸载的方法，通过UIManager操作Native的UI，向下处理children的解析。</p>
-<blockquote>
-<h3 id="挂载：mountComponent-1"><a href="#挂载：mountComponent-1" class="headerlink" title="挂载：mountComponent"></a>挂载：mountComponent</h3><p>返回值为tag，与RN中真实的View关联。    </p>
-<ol>
-<li>UIManager.createView，通过tag关联创建Native的View，tag存储在_rootNodeID。 </li>
-<li>遍历children执行mountComponent，获得markup的数组(createTags)，UIManager.setChildren(containerTag, createTags)管tag关联，实现了Native中View的关联。</li>
-</ol>
-</blockquote>
-<h2 id="-2"><a href="#-2" class="headerlink" title=" "></a> </h2><blockquote>
-<h3 id="更新：updateChildren"><a href="#更新：updateChildren" class="headerlink" title="更新：updateChildren"></a>更新：updateChildren</h3><ol>
-<li>比较前后children里的element，对保留的旧节点执行updateComponent。</li>
-<li>产生三种更新操作：移动（已有）、删除、插入（新建），并通过UIManager.manageChildren执行更新</li>
-</ol>
-</blockquote>
-<h2 id="-3"><a href="#-3" class="headerlink" title=" "></a> </h2><blockquote>
-<h3 id="卸载：unmountComponent-1"><a href="#卸载：unmountComponent-1" class="headerlink" title="卸载：unmountComponent"></a>卸载：unmountComponent</h3><ol>
-<li>遍历children执行unmountComponent </li>
-</ol>
-</blockquote>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote>
-<h3 id="初始化挂载流程"><a href="#初始化挂载流程" class="headerlink" title="初始化挂载流程"></a>初始化挂载流程</h3><ol>
-<li>顶层element -&gt; 实例化为internalInstance（ReactCompositeComponent） -&gt; internalInstance.mountComponent -&gt; render获得下一级element（重复实例化并mountComponent，直至遇到ReactNativeComponent） -&gt; UIManager.createView(Native中真实创建View，返回关联的tag) -&gt; 遍历children， 对child（element）实例化为internalInstance，重复上述挂载过程 -&gt; UIManager.setChildren(将子节点渲染的tag与父tag关联)    </li>
-<li>对于element树，从上到下逐层渲染，element实例化为ReactCompositeComponent或ReactNativeBaseComponent，子节点为数组的均包裹在ReactNativeBaseComponent下。 </li>
-<li>真实的View由ReactNativeBaseComponent负责通过UIManager渲染</li>
-<li>ReactCompositeComponent负责数据管理、传递</li>
-<li>开发中嵌套的组件渲染为真实UI时会经过压缩，压缩标识多级嵌套的标签最终可能是使用一个Native View展示的，压缩发生在ReactCompositeComponent的mountComponent过程中</li>
-</ol>
-</blockquote>
-<h2 id="-4"><a href="#-4" class="headerlink" title=" "></a> </h2><blockquote>
-<h3 id="更新流程"><a href="#更新流程" class="headerlink" title="更新流程"></a>更新流程</h3><ol>
-<li>当触发更新时，由一个节点开始，向下逐层解析，中间经过diff策略（element diff、component diff、children diff）   </li>
-<li>element diff： 比较前后该位置的element，若其可以更新，则向下继续更新；若不可更新，卸载纠节点，挂载新节点</li>
-<li>component diff: shouldComponentUpdate</li>
-<li>children diff: 移动需保留的旧节点并更新，删除废弃的旧节点并卸载，插入新建的节点并挂载</li>
-</ol>
-</blockquote>
+<blockquote><br><br>### 挂载：mountComponent<br><br>返回值为tag，与RN中真实的View关联。<br>1. UIManager.createView，通过tag关联创建Native的View，tag存储在_rootNodeID。<br>2. 遍历children执行mountComponent，获得markup的数组(createTags)，UIManager.setChildren(containerTag, createTags)管tag关联，实现了Native中View的关联。<br></blockquote>
+
+<blockquote><br><br>### 更新：updateChildren<br>1. 比较前后children里的element，对保留的旧节点执行updateComponent。<br>2. 产生三种更新操作：移动（已有）、删除、插入（新建），并通过UIManager.manageChildren执行更新<br></blockquote>
+
+<blockquote><br><br>### 卸载：unmountComponent<br>1. 遍历children执行unmountComponent<br></blockquote>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><blockquote><br><br>### 初始化挂载流程<br>1. 顶层element -&gt; 实例化为internalInstance（ReactCompositeComponent） -&gt; internalInstance.mountComponent -&gt; render获得下一级element（重复实例化并mountComponent，直至遇到ReactNativeComponent） -&gt; UIManager.createView(Native中真实创建View，返回关联的tag) -&gt; 遍历children， 对child（element）实例化为internalInstance，重复上述挂载过程 -&gt; UIManager.setChildren(将子节点渲染的tag与父tag关联)<br>2. 对于element树，从上到下逐层渲染，element实例化为ReactCompositeComponent或ReactNativeBaseComponent，子节点为数组的均包裹在ReactNativeBaseComponent下。<br>3. 真实的View由ReactNativeBaseComponent负责通过UIManager渲染<br>4. ReactCompositeComponent负责数据管理、传递<br>5. 开发中嵌套的组件渲染为真实UI时会经过压缩，压缩标识多级嵌套的标签最终可能是使用一个Native View展示的，压缩发生在ReactCompositeComponent的mountComponent过程中<br></blockquote>
+
+<blockquote><br><br>### 更新流程<br>1. 当触发更新时，由一个节点开始，向下逐层解析，中间经过diff策略（element diff、component diff、children diff）<br>2. element diff： 比较前后该位置的element，若其可以更新，则向下继续更新；若不可更新，卸载纠节点，挂载新节点<br>3. component diff: shouldComponentUpdate<br>4. children diff: 移动需保留的旧节点并更新，删除废弃的旧节点并卸载，插入新建的节点并挂载<br></blockquote>
+
+
 
       
     </div>
@@ -629,7 +580,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactElement：节点类"><span class="nav-number">1.</span> <span class="nav-text">ReactElement：节点类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactComponent：外部组件类"><span class="nav-number">2.</span> <span class="nav-text">ReactComponent：外部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结为三点主要作用："><span class="nav-number">2.1.</span> <span class="nav-text">总结为三点主要作用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactCompositeComponent：内部组件类"><span class="nav-number">3.</span> <span class="nav-text">ReactCompositeComponent：内部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent"><span class="nav-number">3.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#"><span class="nav-number">4.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateComponent"><span class="nav-number">4.1.</span> <span class="nav-text">更新：updateComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-1"><span class="nav-number">5.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent"><span class="nav-number">5.1.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactNativeBaseComponent：RN中映射到Native的组件类"><span class="nav-number">6.</span> <span class="nav-text">ReactNativeBaseComponent：RN中映射到Native的组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent-1"><span class="nav-number">6.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-2"><span class="nav-number">7.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateChildren"><span class="nav-number">7.1.</span> <span class="nav-text">更新：updateChildren</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-3"><span class="nav-number">8.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent-1"><span class="nav-number">8.1.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">9.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化挂载流程"><span class="nav-number">9.1.</span> <span class="nav-text">初始化挂载流程</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#-4"><span class="nav-number">10.</span> <span class="nav-text"> </span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#更新流程"><span class="nav-number">10.1.</span> <span class="nav-text">更新流程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactElement：节点类"><span class="nav-number">1.</span> <span class="nav-text">ReactElement：节点类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactComponent：外部组件类"><span class="nav-number">2.</span> <span class="nav-text">ReactComponent：外部组件类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactCompositeComponent：内部组件类"><span class="nav-number">3.</span> <span class="nav-text">ReactCompositeComponent：内部组件类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactNativeBaseComponent：RN中映射到Native的组件类"><span class="nav-number">4.</span> <span class="nav-text">ReactNativeBaseComponent：RN中映射到Native的组件类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
             
 
           </div>
