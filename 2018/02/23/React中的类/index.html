@@ -100,26 +100,28 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="react,react-native," />
 
 
-<meta name="description" content="From Zero to Hero">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Chipanda&#39;s Blog">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta name="description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。 ReactElement：节点类数据节点，以后简称element，存储了type、key、ref、props等内容。 render的作用就是生成element，是渲染的第一站。element保存了props而并没有stat">
+<meta name="keywords" content="react,react-native">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React中的类">
+<meta property="og:url" content="http://yoursite.com/2018/02/23/React中的类/index.html">
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
-<meta property="og:description" content="From Zero to Hero">
+<meta property="og:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。 ReactElement：节点类数据节点，以后简称element，存储了type、key、ref、props等内容。 render的作用就是生成element，是渲染的第一站。element保存了props而并没有stat">
 <meta property="og:locale" content="zh-CN">
+<meta property="og:updated_time" content="2018-02-23T12:13:32.647Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Chipanda&#39;s Blog">
-<meta name="twitter:description" content="From Zero to Hero">
+<meta name="twitter:title" content="React中的类">
+<meta name="twitter:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。 ReactElement：节点类数据节点，以后简称element，存储了type、key、ref、props等内容。 render的作用就是生成element，是渲染的第一站。element保存了props而并没有stat">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/23/React中的类/"/>
 
 
 
@@ -128,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>Chipanda's Blog</title>
+  <title>React中的类 | Chipanda's Blog</title>
   
 
 
@@ -175,8 +177,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -247,9 +248,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -281,9 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/23/React中的类/" itemprop="url">React中的类</a></h1>
+          <h1 class="post-title" itemprop="name headline">React中的类</h1>
         
 
         <div class="post-meta">
@@ -360,9 +359,7 @@
       
 
       
-        
-          
-            <p>React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。</p>
+        <p>React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。</p>
 <h2 id="ReactElement：节点类"><a href="#ReactElement：节点类" class="headerlink" title="ReactElement：节点类"></a>ReactElement：节点类</h2><p>数据节点，以后简称element，存储了type、key、ref、props等内容。</p>
 <p>render的作用就是生成element，是渲染的第一站。element保存了props而并没有state，因为state会在render方法内作为某个element的props存储在element中。</p>
 <h2 id="ReactComponent：外部组件类"><a href="#ReactComponent：外部组件类" class="headerlink" title="ReactComponent：外部组件类"></a>ReactComponent：外部组件类</h2><p>开发中定义组件所写的类。“外部”可以理解为由开发人员使用的，相对的“内部”是指React内部实现渲染更新而使用的。其实例称为publicInstance。   </p>
@@ -447,8 +444,6 @@
 </ol>
 </blockquote>
 
-          
-        
       
     </div>
 
@@ -466,190 +461,38 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/12/react源码分析（前言）/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="chipanda">
-      <meta itemprop="description" content="">
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Chipanda's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/02/12/react源码分析（前言）/" itemprop="url">react源码分析（前言）</a></h1>
-        
-
-        <div class="post-meta">
-          <span class="post-time">
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">发表于</span>
-              
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-12T11:12:24+08:00">2018-02-12</time>
-            
-
-            
-            
-
-            
-          </span>
-
+        <div class="post-tags">
           
-            <span class="post-category" >
-            
-              <span class="post-meta-divider">|</span>
-            
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">分类于</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
-
-                
-                
-              
-            </span>
+            <a href="/tags/react/" rel="tag"># react</a>
           
-
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
           
-            
-              <span class="post-comments-count">
-                <span class="post-meta-divider">|</span>
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-comment-o"></i>
-                </span>
-                <a href="/2018/02/12/react源码分析（前言）/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/02/12/react源码分析（前言）/" itemprop="commentCount"></span>
-                </a>
-              </span>
-            
-          
-
-          
-          
-
-          
-
-          
-
-          
-
         </div>
-      </header>
-    
+      
 
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
+      
       
       
 
       
-        
-          <p>看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。<br>想着写成自己的第一个系列博客，梳理巩固所思所得，将来忘了也能有个快速回顾的资料。如果能对他人有所助益，是更吼的了。</p>
-<p>以下是目录结构</p>
-<blockquote>
-<h2 id="React中的类"><a href="#React中的类" class="headerlink" title="React中的类"></a>React中的类</h2><p>ReactElement：节点类<br>ReactComponent：外部组件类<br>ReactCompositeComponent：内部组件类<br>ReactNativeBaseComponent：RN中映射到Native的组件类     </p>
-</blockquote>
-<h2 id=""><a href="#" class="headerlink" title=" "></a> </h2><blockquote>
-<h2 id="React中类实例之间的关系"><a href="#React中类实例之间的关系" class="headerlink" title="React中类实例之间的关系"></a>React中类实例之间的关系</h2><p>instantiateReactComponent: 通过element实例成ReactCompositeComponent或ReactNativeBaseComponent<br>生命周期：ReactComponent提供实现，ReactNativeBaseComponent管理调用<br>virtual dom结构<br>render与逐层渲染      </p>
-</blockquote>
-<h2 id="-1"><a href="#-1" class="headerlink" title=" "></a> </h2><blockquote>
-<h2 id="React中的一些工具辅助类"><a href="#React中的一些工具辅助类" class="headerlink" title="React中的一些工具辅助类"></a>React中的一些工具辅助类</h2><p>Transaction：在执行目标方法前后执行配置好的方法<br>CallbackQueue：管理回调队列<br>PooledClass：为了优化实例内存而做的类拓展<br>traverseAllChildren：遍历this.props.children     </p>
-</blockquote>
-<h2 id="-2"><a href="#-2" class="headerlink" title=" "></a> </h2><blockquote>
-<h2 id="React的更新流程（一）"><a href="#React的更新流程（一）" class="headerlink" title="React的更新流程（一）"></a>React的更新流程（一）</h2><p>shouldUpdateReactComponent：element diff<br>shouldComponentUpdate: component diff<br>ReactUpdateQueue：setState等内部实现<br>ReactDefaultBatchingStrategy：所有更新的入口与出口<br>ReactNativeReconcileTransaction：处理更新后需执行的回调<br>ReactUpdatesFlushTransaction：清空待更新组件</p>
-</blockquote>
-<h2 id="-3"><a href="#-3" class="headerlink" title=" "></a> </h2><blockquote>
-<h2 id="React的更新流程（二）"><a href="#React的更新流程（二）" class="headerlink" title="React的更新流程（二）"></a>React的更新流程（二）</h2><p>batchedUpdates：保证callback在一次updatequeue中执行<br>enqueueUpdate：压入一个需更新的internalInstance<br>flushBatchedUpdates: 发起一次清空待更新组件<br>例子：setState后取到的值是新值还是旧值      </p>
-</blockquote>
-<h2 id="-4"><a href="#-4" class="headerlink" title=" "></a> </h2><blockquote>
-<h2 id="React的更新流程（三）"><a href="#React的更新流程（三）" class="headerlink" title="React的更新流程（三）"></a>React的更新流程（三）</h2><p>ReactReconciler：组件处理中心：挂载、更新、卸载<br>ReactChildReconciler：对children中有需要的项执行ReactReconciler<br>ReactMultiChild：拓展ReactNativeBaseComponent，作为中间层调用ReactChildReconciler，children diff更新策略</p>
-</blockquote>
-<h2 id="-5"><a href="#-5" class="headerlink" title=" "></a> </h2>
-          <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/02/12/react源码分析（前言）/#more" rel="contents">
-              阅读全文 &raquo;
-            </a>
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/02/12/react源码分析（前言）/" rel="next" title="react源码分析（前言）">
+                <i class="fa fa-chevron-left"></i> react源码分析（前言）
+              </a>
+            
           </div>
-          <!--/noindex-->
-        
-      
-    </div>
 
-    
+          <span class="post-nav-divider"></span>
 
-    
-    
-    
-
-    
-
-    
-
-    
-
-    <footer class="post-footer">
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
       
 
       
-
-      
-
-      
-      
-        <div class="post-eof"></div>
       
     </footer>
   </div>
@@ -659,14 +502,22 @@
   </article>
 
 
-    
-  </section>
 
-  
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
           
+
+  
+    <div class="comments" id="comments">
+    </div>
+  
+
+
 
         </div>
         
@@ -687,8 +538,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -761,6 +621,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactElement：节点类"><span class="nav-number">1.</span> <span class="nav-text">ReactElement：节点类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactComponent：外部组件类"><span class="nav-number">2.</span> <span class="nav-text">ReactComponent：外部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结为三点主要作用："><span class="nav-number">2.1.</span> <span class="nav-text">总结为三点主要作用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactCompositeComponent：内部组件类"><span class="nav-number">3.</span> <span class="nav-text">ReactCompositeComponent：内部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent"><span class="nav-number">3.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateComponent"><span class="nav-number">3.2.</span> <span class="nav-text">更新：updateComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent"><span class="nav-number">3.3.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactNativeBaseComponent：RN中映射到Native的组件类"><span class="nav-number">4.</span> <span class="nav-text">ReactNativeBaseComponent：RN中映射到Native的组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent-1"><span class="nav-number">4.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateChildren"><span class="nav-number">4.2.</span> <span class="nav-text">更新：updateChildren</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent-1"><span class="nav-number">4.3.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化挂载流程"><span class="nav-number">5.1.</span> <span class="nav-text">初始化挂载流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新流程"><span class="nav-number">5.2.</span> <span class="nav-text">更新流程</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -888,6 +764,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=6.0.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=6.0.4"></script>
+
+
 
   
 
