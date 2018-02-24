@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
 <meta property="og:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-23T13:22:50.000Z">
+<meta property="og:updated_time" content="2018-02-24T10:12:41.099Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React中的类">
 <meta name="twitter:description" content="React实现了一套由数据到展示的渲染更新方案。数据存放在一个个节点中，最终的展示由节点组成的树决定。任何展示的更新都来源于数据的更新，即props或state的更新。">
@@ -415,19 +415,7 @@
 <li>遍历children执行unmountComponent </li>
 </ol>
 <hr>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><h3 id="初始化挂载流程"><a href="#初始化挂载流程" class="headerlink" title="初始化挂载流程"></a>初始化挂载流程</h3><ol>
-<li>顶层element -&gt; 实例化为internalInstance（ReactCompositeComponent） -&gt; internalInstance.mountComponent -&gt; render获得下一级element（重复实例化并mountComponent，直至遇到ReactNativeComponent） -&gt; UIManager.createView(Native中真实创建View，返回关联的tag) -&gt; 遍历children， 对child（element）实例化为internalInstance，重复上述挂载过程 -&gt; UIManager.setChildren(将子节点渲染的tag与父tag关联)    </li>
-<li>对于element树，从上到下逐层渲染，element实例化为ReactCompositeComponent或ReactNativeBaseComponent，子节点为数组的均包裹在ReactNativeBaseComponent下。 </li>
-<li>真实的View由ReactNativeBaseComponent负责通过UIManager渲染</li>
-<li>ReactCompositeComponent负责数据管理、传递</li>
-<li>开发中嵌套的组件渲染为真实UI时会经过压缩，压缩标识多级嵌套的标签最终可能是使用一个Native View展示的，压缩发生在ReactCompositeComponent的mountComponent过程中</li>
-</ol>
-<h3 id="更新流程"><a href="#更新流程" class="headerlink" title="更新流程"></a>更新流程</h3><ol>
-<li>当触发更新时，由一个节点开始，向下逐层解析，中间经过diff策略（element diff、component diff、children diff）   </li>
-<li>element diff： 比较前后该位置的element，若其可以更新，则向下继续更新；若不可更新，卸载纠节点，挂载新节点</li>
-<li>component diff: shouldComponentUpdate</li>
-<li>children diff: 移动需保留的旧节点并更新，删除废弃的旧节点并卸载，插入新建的节点并挂载</li>
-</ol>
+<p>本节介绍了React中的几个基础类的概念，下节将它们串联起来。</p>
 
       
     </div>
@@ -472,6 +460,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/24/React的Virtual-DOM——类实例间的关系/" rel="prev" title="React的Virtual DOM——类实例间的关系">
+                React的Virtual DOM——类实例间的关系 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -548,7 +540,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-count">3</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -616,7 +608,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactElement：节点类"><span class="nav-number">1.</span> <span class="nav-text">ReactElement：节点类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactComponent：外部组件类"><span class="nav-number">2.</span> <span class="nav-text">ReactComponent：外部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结为三点主要作用："><span class="nav-number">2.1.</span> <span class="nav-text">总结为三点主要作用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactCompositeComponent：内部组件类"><span class="nav-number">3.</span> <span class="nav-text">ReactCompositeComponent：内部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent"><span class="nav-number">3.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateComponent"><span class="nav-number">3.2.</span> <span class="nav-text">更新：updateComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent"><span class="nav-number">3.3.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactNativeBaseComponent：RN中映射到Native的组件类"><span class="nav-number">4.</span> <span class="nav-text">ReactNativeBaseComponent：RN中映射到Native的组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent-1"><span class="nav-number">4.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateChildren"><span class="nav-number">4.2.</span> <span class="nav-text">更新：updateChildren</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent-1"><span class="nav-number">4.3.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#初始化挂载流程"><span class="nav-number">5.1.</span> <span class="nav-text">初始化挂载流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新流程"><span class="nav-number">5.2.</span> <span class="nav-text">更新流程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactElement：节点类"><span class="nav-number">1.</span> <span class="nav-text">ReactElement：节点类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactComponent：外部组件类"><span class="nav-number">2.</span> <span class="nav-text">ReactComponent：外部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#总结为三点主要作用："><span class="nav-number">2.1.</span> <span class="nav-text">总结为三点主要作用：</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactCompositeComponent：内部组件类"><span class="nav-number">3.</span> <span class="nav-text">ReactCompositeComponent：内部组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent"><span class="nav-number">3.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateComponent"><span class="nav-number">3.2.</span> <span class="nav-text">更新：updateComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent"><span class="nav-number">3.3.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactNativeBaseComponent：RN中映射到Native的组件类"><span class="nav-number">4.</span> <span class="nav-text">ReactNativeBaseComponent：RN中映射到Native的组件类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载：mountComponent-1"><span class="nav-number">4.1.</span> <span class="nav-text">挂载：mountComponent</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新：updateChildren"><span class="nav-number">4.2.</span> <span class="nav-text">更新：updateChildren</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卸载：unmountComponent-1"><span class="nav-number">4.3.</span> <span class="nav-text">卸载：unmountComponent</span></a></li></ol></li></ol></div>
             
 
           </div>
