@@ -111,7 +111,7 @@
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
 <meta property="og:description" content="看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。自己的第一个系列博客，梳理巩固所思所得。如果能对你有所助益，是更吼的了。 以下是目录结构">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-24T12:17:29.000Z">
+<meta property="og:updated_time" content="2018-02-26T02:56:27.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="react源码分析（前言）">
 <meta name="twitter:description" content="看了一段时间React源码，主要是React Native实现的Virtual Dom树渲染更新部分。React版本是15.2.1，React Native版本是0.30.0。自己的第一个系列博客，梳理巩固所思所得。如果能对你有所助益，是更吼的了。 以下是目录结构">
@@ -363,8 +363,8 @@
 <p>以下是目录结构<br><a id="more"></a></p>
 <h2 id="React中的类"><a href="#React中的类" class="headerlink" title="React中的类"></a>React中的类</h2><p>ReactElement：节点类<br>ReactComponent：外部组件类<br>ReactCompositeComponent：内部组件类<br>ReactNativeBaseComponent：RN中映射到Native的组件类     </p>
 <h2 id="React的Virtual-DOM——类实例间的关系"><a href="#React的Virtual-DOM——类实例间的关系" class="headerlink" title="React的Virtual DOM——类实例间的关系"></a>React的Virtual DOM——类实例间的关系</h2><p>instantiateReactComponent: 通过element实例成ReactCompositeComponent或ReactNativeBaseComponent<br>生命周期：ReactComponent提供实现，ReactNativeBaseComponent管理调用<br>virtual dom结构<br>render与逐层渲染      </p>
-<h2 id="React中的一些工具辅助类"><a href="#React中的一些工具辅助类" class="headerlink" title="React中的一些工具辅助类"></a>React中的一些工具辅助类</h2><p>Transaction：在执行目标方法前后执行配置好的方法<br>CallbackQueue：管理回调队列<br>PooledClass：为了优化实例内存而做的类拓展<br>traverseAllChildren：遍历this.props.children     </p>
-<h2 id="React的更新流程（一）"><a href="#React的更新流程（一）" class="headerlink" title="React的更新流程（一）"></a>React的更新流程（一）</h2><p>shouldUpdateReactComponent：element diff<br>shouldComponentUpdate: component diff<br>ReactUpdateQueue：setState等内部实现<br>ReactDefaultBatchingStrategy：所有更新的入口与出口<br>ReactNativeReconcileTransaction：处理更新后需执行的回调<br>ReactUpdatesFlushTransaction：清空待更新组件</p>
+<h2 id="React中的一些辅助工具类"><a href="#React中的一些辅助工具类" class="headerlink" title="React中的一些辅助工具类"></a>React中的一些辅助工具类</h2><p>Transaction：在执行目标方法前后执行配置好的方法<br>CallbackQueue：管理回调队列<br>PooledClass：为了优化实例内存而做的类拓展<br>traverseAllChildren：遍历this.props.children     </p>
+<h2 id="React的更新流程（一）"><a href="#React的更新流程（一）" class="headerlink" title="React的更新流程（一）"></a>React的更新流程（一）</h2><p>shouldUpdateReactComponent：element diff<br>shouldComponentUpdate: component diff<br>ReactUpdateQueue：setState等内部实现<br>ReactDefaultBatchingStrategy：所有更新的入口与出口<br>ReactNativeReconcileTransaction：处理更新后需执行的回调<br>ReactUpdatesFlushTransaction：清空待更新组件        </p>
 <h2 id="React的更新流程（二）"><a href="#React的更新流程（二）" class="headerlink" title="React的更新流程（二）"></a>React的更新流程（二）</h2><p>batchedUpdates：保证callback在一次updatequeue中执行<br>enqueueUpdate：压入一个需更新的internalInstance<br>flushBatchedUpdates: 发起一次清空待更新组件<br>例子：setState后取到的值是新值还是旧值      </p>
 <h2 id="React的更新流程（三）"><a href="#React的更新流程（三）" class="headerlink" title="React的更新流程（三）"></a>React的更新流程（三）</h2><p>ReactReconciler：组件处理中心：挂载、更新、卸载<br>ReactChildReconciler：对children中有需要的项执行ReactReconciler<br>ReactMultiChild：拓展ReactNativeBaseComponent，作为中间层调用ReactChildReconciler，children diff更新策略</p>
 
@@ -487,7 +487,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-count">4</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
@@ -555,7 +555,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React中的类"><span class="nav-number">1.</span> <span class="nav-text">React中的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的Virtual-DOM——类实例间的关系"><span class="nav-number">2.</span> <span class="nav-text">React的Virtual DOM——类实例间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React中的一些工具辅助类"><span class="nav-number">3.</span> <span class="nav-text">React中的一些工具辅助类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（一）"><span class="nav-number">4.</span> <span class="nav-text">React的更新流程（一）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（二）"><span class="nav-number">5.</span> <span class="nav-text">React的更新流程（二）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（三）"><span class="nav-number">6.</span> <span class="nav-text">React的更新流程（三）</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#React中的类"><span class="nav-number">1.</span> <span class="nav-text">React中的类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的Virtual-DOM——类实例间的关系"><span class="nav-number">2.</span> <span class="nav-text">React的Virtual DOM——类实例间的关系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React中的一些辅助工具类"><span class="nav-number">3.</span> <span class="nav-text">React中的一些辅助工具类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（一）"><span class="nav-number">4.</span> <span class="nav-text">React的更新流程（一）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（二）"><span class="nav-number">5.</span> <span class="nav-text">React的更新流程（二）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#React的更新流程（三）"><span class="nav-number">6.</span> <span class="nav-text">React的更新流程（三）</span></a></li></ol></div>
             
 
           </div>
