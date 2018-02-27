@@ -100,17 +100,18 @@
 
 
   
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="react,react-native," />
 
 
 <meta name="description" content="React的更新流程（批处理更新）是围绕待更新组件（React称为dirtyComponent）来实现，dirtyComponent即ReactCompositeComponent实例。 批处理更新过程如下：  开始一次批处理更新 收集dirtyComponents 更新dirtyComponent（更改UI的操作在这里） 执行回调（生命周期函数、setState传入的回调方法） 若在3、4间产生">
+<meta name="keywords" content="react,react-native">
 <meta property="og:type" content="article">
 <meta property="og:title" content="React的更新流程（一）">
 <meta property="og:url" content="http://yoursite.com/2018/02/26/React的更新流程（一）/index.html">
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
 <meta property="og:description" content="React的更新流程（批处理更新）是围绕待更新组件（React称为dirtyComponent）来实现，dirtyComponent即ReactCompositeComponent实例。 批处理更新过程如下：  开始一次批处理更新 收集dirtyComponents 更新dirtyComponent（更改UI的操作在这里） 执行回调（生命周期函数、setState传入的回调方法） 若在3、4间产生">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-26T13:11:06.000Z">
+<meta property="og:updated_time" content="2018-02-27T07:43:26.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="React的更新流程（一）">
 <meta name="twitter:description" content="React的更新流程（批处理更新）是围绕待更新组件（React称为dirtyComponent）来实现，dirtyComponent即ReactCompositeComponent实例。 批处理更新过程如下：  开始一次批处理更新 收集dirtyComponents 更新dirtyComponent（更改UI的操作在这里） 执行回调（生命周期函数、setState传入的回调方法） 若在3、4间产生">
@@ -303,6 +304,24 @@
           </span>
 
           
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/react/" itemprop="url" rel="index"><span itemprop="name">react</span></a></span>
+
+                
+                
+              
+            </span>
+          
 
           
             
@@ -348,9 +367,10 @@
 <li>更新dirtyComponent（更改UI的操作在这里）</li>
 <li>执行回调（生命周期函数、setState传入的回调方法）</li>
 <li>若在3、4间产生了新的dirtyComponent，重复3、4步，直至dirtyComponents清空，完成了一次完整的批处理更新<a id="more"></a>
-<h2 id="ReactDefaultBatchingStrategy"><a href="#ReactDefaultBatchingStrategy" class="headerlink" title="ReactDefaultBatchingStrategy"></a>ReactDefaultBatchingStrategy</h2></li>
+</li>
 </ol>
-<p>全局变量，管理一次更新流程的开始、结束。功能如下：</p>
+<hr>
+<h2 id="ReactDefaultBatchingStrategy"><a href="#ReactDefaultBatchingStrategy" class="headerlink" title="ReactDefaultBatchingStrategy"></a>ReactDefaultBatchingStrategy</h2><p>全局变量，管理一次更新流程的开始、结束。功能如下：</p>
 <ul>
 <li>isBatchingUpdates，标识当前是否处于更新流程中</li>
 <li>batchedUpdates方法，接受一个callback参数<ul>
@@ -442,6 +462,14 @@
 
     <footer class="post-footer">
       
+        <div class="post-tags">
+          
+            <a href="/tags/react/" rel="tag"># react</a>
+          
+            <a href="/tags/react-native/" rel="tag"># react-native</a>
+          
+        </div>
+      
 
       
       
@@ -460,6 +488,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/02/27/React的更新流程（二）/" rel="prev" title="React的更新流程（二）">
+                React的更新流程（二） <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -536,7 +568,7 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">日志</span>
                   </a>
                 </div>

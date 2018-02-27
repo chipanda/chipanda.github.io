@@ -103,25 +103,25 @@
   <meta name="keywords" content="react,react-native," />
 
 
-<meta name="description" content="本节讲述React中的Virtual DOM是如何逐层解析并绘制为真实页面的。">
+<meta name="description" content="上节讲述了React的更新流程，更新流程是以完成所有dirtyComponents的更新结束的。dirtyComponent是internalInstance，任意组件的挂载、更新、卸载都是通过ReactReconciler统一调用的。">
 <meta name="keywords" content="react,react-native">
 <meta property="og:type" content="article">
-<meta property="og:title" content="React的Virtual DOM——类实例间的关系">
-<meta property="og:url" content="http://yoursite.com/2018/02/24/React的Virtual-DOM——类实例间的关系/index.html">
+<meta property="og:title" content="React的更新流程（二）">
+<meta property="og:url" content="http://yoursite.com/2018/02/27/React的更新流程（二）/index.html">
 <meta property="og:site_name" content="Chipanda&#39;s Blog">
-<meta property="og:description" content="本节讲述React中的Virtual DOM是如何逐层解析并绘制为真实页面的。">
+<meta property="og:description" content="上节讲述了React的更新流程，更新流程是以完成所有dirtyComponents的更新结束的。dirtyComponent是internalInstance，任意组件的挂载、更新、卸载都是通过ReactReconciler统一调用的。">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2018-02-27T07:43:16.000Z">
+<meta property="og:updated_time" content="2018-02-27T07:43:31.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="React的Virtual DOM——类实例间的关系">
-<meta name="twitter:description" content="本节讲述React中的Virtual DOM是如何逐层解析并绘制为真实页面的。">
+<meta name="twitter:title" content="React的更新流程（二）">
+<meta name="twitter:description" content="上节讲述了React的更新流程，更新流程是以完成所有dirtyComponents的更新结束的。dirtyComponent是internalInstance，任意组件的挂载、更新、卸载都是通过ReactReconciler统一调用的。">
 
 
 
 
 
 
-  <link rel="canonical" href="http://yoursite.com/2018/02/24/React的Virtual-DOM——类实例间的关系/"/>
+  <link rel="canonical" href="http://yoursite.com/2018/02/27/React的更新流程（二）/"/>
 
 
 
@@ -130,7 +130,7 @@
     sidebar: "",
   };
 </script>
-  <title>React的Virtual DOM——类实例间的关系 | Chipanda's Blog</title>
+  <title>React的更新流程（二） | Chipanda's Blog</title>
   
 
 
@@ -265,7 +265,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/24/React的Virtual-DOM——类实例间的关系/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/02/27/React的更新流程（二）/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="chipanda">
@@ -282,7 +282,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">React的Virtual DOM——类实例间的关系</h1>
+          <h1 class="post-title" itemprop="name headline">React的更新流程（二）</h1>
         
 
         <div class="post-meta">
@@ -294,7 +294,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-24T20:16:52+08:00">2018-02-24</time>
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-02-27T10:54:39+08:00">2018-02-27</time>
             
 
             
@@ -330,8 +330,8 @@
                 <span class="post-meta-item-icon">
                   <i class="fa fa-comment-o"></i>
                 </span>
-                <a href="/2018/02/24/React的Virtual-DOM——类实例间的关系/#comments" itemprop="discussionUrl">
-                  <span class="post-comments-count valine-comment-count" data-xid="/2018/02/24/React的Virtual-DOM——类实例间的关系/" itemprop="commentCount"></span>
+                <a href="/2018/02/27/React的更新流程（二）/#comments" itemprop="discussionUrl">
+                  <span class="post-comments-count valine-comment-count" data-xid="/2018/02/27/React的更新流程（二）/" itemprop="commentCount"></span>
                 </a>
               </span>
             
@@ -359,43 +359,37 @@
       
 
       
-        <p>本节讲述React中的Virtual DOM是如何逐层解析并绘制为真实页面的。<br><a id="more"></a></p>
+        <p>上节讲述了React的更新流程，更新流程是以完成所有dirtyComponents的更新结束的。<br>dirtyComponent是internalInstance，任意组件的挂载、更新、卸载都是通过ReactReconciler统一调用的。<br><a id="more"></a></p>
 <hr>
-<h2 id="instantiateReactComponent-通过element实例成ReactCompositeComponent或ReactNativeBaseComponent"><a href="#instantiateReactComponent-通过element实例成ReactCompositeComponent或ReactNativeBaseComponent" class="headerlink" title="instantiateReactComponent: 通过element实例成ReactCompositeComponent或ReactNativeBaseComponent"></a>instantiateReactComponent: 通过element实例成ReactCompositeComponent或ReactNativeBaseComponent</h2><ol>
-<li>instantiateReactComponent将节点实例化为具备挂载、更新、卸载能力的实例</li>
-<li>存在5种：<ol>
-<li>ReactEmptyComponent.create（依赖注入，在RN中是一个空的View。空节点是当render返回为null时渲染的，children里的null会被过滤掉）</li>
-<li>ReactHostComponent.createInternalComponent（依赖注入，RN中不存在该类型的实例）</li>
-<li>ReactHostComponent.createInstanceForText（字符串，依赖注入，ReactNativeTextComponent，类似于ReactNativeBaseComponent）</li>
-<li>ReactCompositeComponentWrapper（ReactCompositeComponent） </li>
-<li>element.type（ReactNativeBaseComponent）</li>
+<h2 id="ReactReconciler：组件处理中心：挂载、更新、卸载"><a href="#ReactReconciler：组件处理中心：挂载、更新、卸载" class="headerlink" title="ReactReconciler：组件处理中心：挂载、更新、卸载"></a>ReactReconciler：组件处理中心：挂载、更新、卸载</h2><ul>
+<li>mountComponent，挂载组件，并将ref处理加入callbackqueue</li>
+<li>unmountComponent，将ref清空，卸载组件</li>
+<li>receiveComponent，使用nextElement执行更新</li>
+<li>performUpdateIfNecessary，对dirtyComponent更新<ol>
+<li>若存在_pendingElement，走receiveComponent流程</li>
+<li>反之，直接进入internalInstance的updateComponent</li>
 </ol>
 </li>
+<li>getHostNode，在RN中一个原生组件有rootID与真实的Native View关联。任意组件的hostNode为其树结构中最顶级原生组件的rootID</li>
+</ul>
+<hr>
+<h2 id="updateComponent-internalInstance的更新"><a href="#updateComponent-internalInstance的更新" class="headerlink" title="updateComponent: internalInstance的更新"></a>updateComponent: internalInstance的更新</h2><ol>
+<li>ReactCompositeComponent，执行相关生命周期，并对其renderedComponent继续更新</li>
+<li>ReactNativeBaseComponent，无生命周期，直接通过UIManager更新Native UI，并对rendedChildren继续更新</li>
+</ol>
+<h2 id="shouldUpdateReactComponent：element-diff"><a href="#shouldUpdateReactComponent：element-diff" class="headerlink" title="shouldUpdateReactComponent：element diff"></a>shouldUpdateReactComponent：element diff</h2><p>比较同一处的prevElement和nextElement，是否存在更新的条件。若可以更新，在原有实例上更新；反之，卸载旧的，挂载新的</p>
+<ol>
+<li>prevElement和nextElement都是空，可更新</li>
+<li>prevElement和nextElement都是数字或字符串，可更新</li>
+<li>prevElement和nextElement都是element类型，且element.type相同（类型相同），且key相同，可更新</li>
 </ol>
 <hr>
-<h2 id="生命周期：ReactComponent提供实现，ReactCompositeComponent管理调用"><a href="#生命周期：ReactComponent提供实现，ReactCompositeComponent管理调用" class="headerlink" title="生命周期：ReactComponent提供实现，ReactCompositeComponent管理调用"></a>生命周期：ReactComponent提供实现，ReactCompositeComponent管理调用</h2><ol>
-<li>在开发过程中我们会给有需要的组件实现它的生命周期函数</li>
-<li>一个组件在render中是被识别为element的，根据element创建的ReactCompositeComponent的实例（internalInstance）的renderedComponent即组件的实例（publicInstance）</li>
-<li>一个ReactComponent节点的挂载、更新、卸载会调用internalInstance的mountComponent、updateComponent、unmountComponent。在此期间触发其对应的publicInstance实现的各生命周期函数</li>
-</ol>
-<hr>
-<h2 id="virtual-dom结构"><a href="#virtual-dom结构" class="headerlink" title="virtual dom结构"></a>virtual dom结构</h2><ol>
-<li>React的virtual dom树即由element组成的节点树，这些节点包含自定义组件、原生组件</li>
-<li>每个自定义组件都可以解析为原生组件组成的节点树</li>
-<li>原生组件可以绘制成Native中真实View，真实的View由ReactNativeBaseComponent通过调用UIManager绘制</li>
-<li>ReactCompositeComponent的渲染本质是处理数据，并调用向下层节点的渲染，当遇到ReactNativeBaseComponent时，才真正绘制</li>
-<li>当ReactNativeBaseComponent绘制完，继续处理其children节点，循环2-4，最终整棵树处理完成实现了virtual dom在Native中的绘制</li>
-</ol>
-<hr>
-<h2 id="render与逐层渲染"><a href="#render与逐层渲染" class="headerlink" title="render与逐层渲染"></a>render与逐层渲染</h2><h3 id="首次挂载流程"><a href="#首次挂载流程" class="headerlink" title="首次挂载流程"></a>首次挂载流程</h3><ol>
-<li>顶层element -&gt; 实例化为internalInstance（ReactCompositeComponent） -&gt; internalInstance.mountComponent -&gt; render获得下一级element（重复实例化并mountComponent，直至遇到ReactNativeComponent） -&gt; UIManager.createView(Native中真实创建View，返回关联的tag) -&gt; 遍历children， 对child（element）实例化为internalInstance，重复上述挂载过程 -&gt; UIManager.setChildren(将子节点渲染的tag与父tag关联)    </li>
-</ol>
-<h3 id="更新流程"><a href="#更新流程" class="headerlink" title="更新流程"></a>更新流程</h3><ol>
-<li>当触发更新时，由一个节点开始，向下逐层解析，中间经过diff策略（element diff、component diff、children diff）   </li>
-<li>element diff： 比较前后该位置的element，若其可以更新，则向下继续更新；若不可更新，卸载纠节点，挂载新节点</li>
-<li>component diff: shouldComponentUpdate</li>
-<li>children diff: 移动需保留的旧节点并更新，删除废弃的旧节点并卸载，插入新建的节点并挂载</li>
-</ol>
+<h2 id="shouldComponentUpdate-component-diff"><a href="#shouldComponentUpdate-component-diff" class="headerlink" title="shouldComponentUpdate: component diff"></a>shouldComponentUpdate: component diff</h2><p>当在一个element上更新时，提供的自定义方法，判定是否需要更新</p>
+<ul>
+<li>接受nextProps、nextState、nextContext三个参数</li>
+<li>PureComponent的shouldComponentUpdate浅比较nextProps、nextState</li>
+<li>若forUpdate，则忽略shouldComponentUpdate的判断</li>
+</ul>
 
       
     </div>
@@ -431,8 +425,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/02/23/React中的类/" rel="next" title="React中的类">
-                <i class="fa fa-chevron-left"></i> React中的类
+              <a href="/2018/02/26/React的更新流程（一）/" rel="next" title="React的更新流程（一）">
+                <i class="fa fa-chevron-left"></i> React的更新流程（一）
               </a>
             
           </div>
@@ -441,8 +435,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/02/26/React中的一些辅助工具类/" rel="prev" title="React中的一些辅助工具类">
-                React中的一些辅助工具类 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/02/27/React的更新流程（三）/" rel="prev" title="React的更新流程（三）">
+                React的更新流程（三） <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -588,7 +582,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#instantiateReactComponent-通过element实例成ReactCompositeComponent或ReactNativeBaseComponent"><span class="nav-number">1.</span> <span class="nav-text">instantiateReactComponent: 通过element实例成ReactCompositeComponent或ReactNativeBaseComponent</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生命周期：ReactComponent提供实现，ReactCompositeComponent管理调用"><span class="nav-number">2.</span> <span class="nav-text">生命周期：ReactComponent提供实现，ReactCompositeComponent管理调用</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#virtual-dom结构"><span class="nav-number">3.</span> <span class="nav-text">virtual dom结构</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#render与逐层渲染"><span class="nav-number">4.</span> <span class="nav-text">render与逐层渲染</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#首次挂载流程"><span class="nav-number">4.1.</span> <span class="nav-text">首次挂载流程</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#更新流程"><span class="nav-number">4.2.</span> <span class="nav-text">更新流程</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#ReactReconciler：组件处理中心：挂载、更新、卸载"><span class="nav-number">1.</span> <span class="nav-text">ReactReconciler：组件处理中心：挂载、更新、卸载</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#updateComponent-internalInstance的更新"><span class="nav-number">2.</span> <span class="nav-text">updateComponent: internalInstance的更新</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldUpdateReactComponent：element-diff"><span class="nav-number">3.</span> <span class="nav-text">shouldUpdateReactComponent：element diff</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#shouldComponentUpdate-component-diff"><span class="nav-number">4.</span> <span class="nav-text">shouldComponentUpdate: component diff</span></a></li></ol></div>
             
 
           </div>
